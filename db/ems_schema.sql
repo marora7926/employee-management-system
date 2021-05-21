@@ -1,11 +1,11 @@
 -- drop databae with name ems_schema if already exist 
-DROP DATABASE IF EXISTS ems_schema;
+DROP DATABASE IF EXISTS employeeDB;
 
 -- create a dtaabase from scratch
-CREATE DATABASE ems_schema;
+CREATE DATABASE employeeDB;
 
 -- use the existing database just created
-USE ems_schema;
+USE employeeDB;
 
 -- create a table with a name "department", defining variable within this table and defining property of each of the variables 
 CREATE TABLE department (
