@@ -32,3 +32,7 @@ CREATE TABLE employee (
   manager_id INT,
   PRIMARY KEY (id)
 );
+
+SELECT * FROM employeedb.department;
+SELECT * FROM employeedb.employee;
+SELECT * FROM employeedb.role;
