@@ -4,7 +4,7 @@ const inquirer = require("inquirer");
 const addDepartment = require("./lib/addDepartment");
 const addEmployee = require("./lib/addEmployee");
 const addRole = require("./lib/addRole");
-const updateEmployee = require("./lib/updateEmployee");
+const updateEmployeeRole = require("./lib/updateEmployeeRole");
 const viewDepartments = require("./lib/viewDepartments");
 const viewRoles = require("./lib/viewRoles");
 const viewEmployees = require("./lib/viewEmployees");
@@ -60,7 +60,7 @@ const runTasks = () => {
                 viewEmployees();
             break;
             case 'Update employee role':
-                updateEmployee();
+                updateEmployeeRole();
             break;
             case 'Exit':
                 connection.end();
