@@ -1,6 +1,14 @@
 const mysql = require('mysql');
 const inquirer = require("inquirer");
 
+const addDepartment = require("./lib/addDepartment");
+const addEmployee = require("./lib/addEmployee");
+const addRole = require("./lib/addRole");
+const updateEmployee = require("./lib/updateEmployee");
+const viewDepartments = require("./lib/viewDepartments");
+const viewRoles = require("./lib/viewRoles");
+const viewEmployees = require("./lib/viewEmployees");
+
 // Connecting via js 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -35,31 +43,24 @@ const runTasks = () => {
         switch (answer.task) {
             case 'Add a department':
                 addDepartment();
-                runTasks();
             break;
             case 'Add a role':
                 addRole();
-                runTasks();
             break;
             case 'Add an employee':
                 addEmployee();
-                runTasks();
             break;
             case 'View departments':
                 viewDepartments();
-                runTasks();
             break;
             case 'View roles':
                 viewRoles();
-                runTasks();
             break;
             case 'View employees':
                 viewEmployees();
-                runTasks();
             break;
             case 'Update employee role':
                 updateEmployee();
-                runTasks();
             break;
             case 'Exit':
                 connection.end();
@@ -70,4 +71,3 @@ const runTasks = () => {
         }
     });
 };
-
