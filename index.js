@@ -5,6 +5,8 @@ require("console.table")
 
 // required files
 const connection = require("./utils/connection");
+const addDepartment = require("./utils/addDepartment")
+const addEmployee = require("./utils/addEmployee")
 const viewDepartments = require("./utils/viewDepartments")
 const viewEmployees = require("./utils/viewEmployees")
 const viewRoles = require("./utils/viewRoles")
@@ -51,7 +53,7 @@ function runTasks() {
         ],
     })
     .then((answer) => {
-        console.log(answer) //checking the response, if inquirer working
+        // console.log(answer) //checking the response, if inquirer working
         switch (answer.tasks) {
             case 'Add a department':
                 addDepartment();
@@ -63,7 +65,7 @@ function runTasks() {
                 addEmployee();
             break;
             case 'View departments':
-                viewDepartments();
+                viewDepartments();           
             break;
             case 'View roles':
                 viewRoles();

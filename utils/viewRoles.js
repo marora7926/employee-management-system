@@ -8,11 +8,12 @@ const allRolesQuery =
     role.d_id AS "Dept_ID"
     FROM role`;
 
-async function viewRoles () {
+function viewRoles () {
     connection.query(allRolesQuery, (err, res) => {
         if (err) throw err;
+        console.log('Showing all roles........\n');
         console.table(res);
-    })
+    });
     // runTasks();
 };
 

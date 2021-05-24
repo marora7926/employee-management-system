@@ -6,9 +6,10 @@ const allDepartmentsQuery =
     department.name AS "Departments"
     FROM department`;
 
-async function viewDepartments () {
+function viewDepartments () {
     connection.query(allDepartmentsQuery, (err, res) => {
         if (err) throw err;
+        console.log('Showing all departments......\n');
         console.table(res);
     })
     // runTasks();

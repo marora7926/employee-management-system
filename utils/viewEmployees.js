@@ -9,9 +9,10 @@ const allEmployeesQuery =
     employee.manager_id as "Manager_ID"
     FROM employee`;
 
-async function viewEmployees () {
+function viewEmployees () {
     connection.query(allEmployeesQuery, (err, res) => {
         if (err) throw err;
+        console.log('Showing all employees........\n');
         console.table(res);
     })
     // runTasks();
