@@ -1,16 +1,11 @@
 // required dependencies
 const inquirer = require("inquirer");
 const logoArt = require('asciiart-logo')
+require("console.table")
 
 // required files
 const connection = require("./db/connection");
-// const addDepartment = require("./lib/addDepartment");
-// const addEmployee = require("./lib/addEmployee");
-// const addRole = require("./lib/addRole");
-// const updateEmployeeRole = require("./lib/updateEmployeeRole");
-// const viewDepartments = require("./lib/viewDepartments");
-// const viewRoles = require("./lib/viewRoles");
-// const viewEmployees = require("./lib/viewEmployees");
+const viewDepartments = require("./lib/viewDepartments")
 
 // after connection logo art using asciiart-logo
 connection.connect((err) => {
