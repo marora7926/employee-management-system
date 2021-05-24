@@ -145,4 +145,4 @@ https://github.com/marora7926/employee-management-system
 [Team Profile Generator Walkthrough Video](https://cloudstor.aarnet.edu.au/plus/s/Kc02EkdKAJxQvH0)
 
 - - -
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+© 2021 Mohit Arora. Confidential and Proprietary. All Rights Reserved.

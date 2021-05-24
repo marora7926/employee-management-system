@@ -1,11 +1,11 @@
 -- drop databae with name ems_schema if already exist 
-DROP DATABASE IF EXISTS employeeDB;
+DROP DATABASE IF EXISTS employeedb;
 
 -- create a dtaabase from scratch
-CREATE DATABASE employeeDB;
+CREATE DATABASE employeedb;
 
 -- use the existing database just created
-USE employeeDB;
+USE employeedb;
 
 -- create a table with a name "department", defining variable within this table and defining property of each of the variables 
 CREATE TABLE department (
@@ -32,7 +32,3 @@ CREATE TABLE employee (
   manager_id INT,
   PRIMARY KEY (id)
 );
-
-SELECT * FROM employeedb.department;
-SELECT * FROM employeedb.employee;
-SELECT * FROM employeedb.role;

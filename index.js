@@ -1,8 +1,9 @@
-const mysql = require('mysql');
+// required dependencies
 const inquirer = require("inquirer");
-require("dotenv")
-require("console.table")
+const logoArt = require('asciiart-logo')
 
+// required files
+const connection = require("./db/connection");
 const addDepartment = require("./lib/addDepartment");
 const addEmployee = require("./lib/addEmployee");
 const addRole = require("./lib/addRole");
@@ -11,31 +12,31 @@ const viewDepartments = require("./lib/viewDepartments");
 const viewRoles = require("./lib/viewRoles");
 const viewEmployees = require("./lib/viewEmployees");
 
-// Connecting via js 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    port: 3306,
-    user: 'root',
-    password: 'Yogindance@97762',
-    database: 'employeeDB',
-  });
-
-// // Connecting via js 
-// const connection = mysql.createConnection({
-//   host: 'localhost',
-//   port: 3306,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASSWORD,
-//   database: process.env.DB_NAME,
-// });
-
+// after connection logo art using asciiart-logo
 connection.connect((err) => {
     if (err) throw err;
-    console.log(`connected as id ${connection.threadId}`);
+    console.log(`connected as id ${connection.threadId}`); //display the connection id
+    // ASCII art logo
+    console.log(
+        logoArt({
+            name: 'EMS*',
+            font: 'ANSI Shadow',
+            lineChars: 5,
+            padding: 5,
+            margin: 5,
+            borderColor: 'grey',
+            logoColor: 'bold-green',
+            textColor: 'bold-yellow',
+        })
+        .emptyLine() 
+        .right('*Employee Management System')
+        .render()
+    )
     runTasks();
 });
 
-const runTasks = () => {
+// using inquirier for questions prompt and task to perform based on user selection. 
+function runTasks() {
     inquirer.prompt({
         type: 'list',
         name: 'tasks',
@@ -74,66 +75,9 @@ const runTasks = () => {
             case 'Update employee role':
                 updateEmployeeRole();
             break;
-            case 'Exit':
+            default: 'Exit'
                 connection.end();
-            break;
-            default:
-                console.log(`Invalid action: ${answer.task}`);
-            break;
+                process.exit();
         }
     });
 };
-
-
-// // function to add a department
-// function addDepartment() {
-//     inquirer.prompt([
-//         {
-//             type: "input",
-//             name: "department_name",
-//             message: "Write the name of the department you would like to add"
-//         }
-//     ])
-//         .then(res => {
-//             let departmentName = res;
-//             db.addDepartment(name)
-//             .then(() => 
-//                 console.log(`Added ${departmentName.name} to the database`)
-//             )
-//         })
-// }
-
-// // function to add an employee
-// function addEmployee() {
-// }
-
-// // function to add a role
-// function addRole() {
-// }
-
-// // function to view all departments
-// function viewDepartments() {
-//     db.Departments()
-//     .then(([rows]) => {
-//         let departments = rows;
-//         console.table(departments);
-//     })
-// };
-
-// // function to view all employees
-// function viewEmployees() {
-//     db.Employees()
-//         .then(([rows]) => {
-//             let employees = rows;
-//             console.table(employees);
-//         })
-// };
-
-// // function to view all roles
-// function viewRoles() {
-//     db.Roles()
-//         .then(([rows]) => {
-//             let roles = rows;
-//             console.table(roles);
-//         })
-// };
