@@ -4,8 +4,10 @@ const logoArt = require('asciiart-logo')
 require("console.table")
 
 // required files
-const connection = require("./db/connection");
-const viewDepartments = require("./lib/viewDepartments")
+const connection = require("./utils/connection");
+const viewDepartments = require("./utils/viewDepartments")
+const viewEmployees = require("./utils/viewEmployees")
+const viewRoles = require("./utils/viewRoles")
 
 // after connection logo art using asciiart-logo
 connection.connect((err) => {
@@ -48,7 +50,8 @@ function runTasks() {
         ],
     })
     .then((answer) => {
-        switch (answer.task) {
+        console.log(answer) //checking the response, if inquirer working
+        switch (answer.tasks) {
             case 'Add a department':
                 addDepartment();
             break;

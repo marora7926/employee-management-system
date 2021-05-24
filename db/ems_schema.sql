@@ -9,26 +9,28 @@ USE employeedb;
 
 -- create a table with a name "department", defining variable within this table and defining property of each of the variables 
 CREATE TABLE department (
-  id INTEGER AUTO_INCREMENT,
+  d_id INTEGER AUTO_INCREMENT,
   name VARCHAR(30) NOT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (d_id)
 );
 
 -- create a table with a name "role"
 CREATE TABLE role (
-  id INT AUTO_INCREMENT,
+  r_id INT AUTO_INCREMENT,
   title VARCHAR(30) NOT NULL,
   salary DECIMAL(6) NOT NULL,
-  department_id INT NOT NULL,
-  PRIMARY KEY (id)
+  d_id INT NOT NULL,
+  PRIMARY KEY (r_id),
+  FOREIGN KEY (d_id) REFERENCES department(d_id)
 );
 
 -- create a table with a name "employee"
 CREATE TABLE employee (
-  id INT AUTO_INCREMENT,
+  e_id INT AUTO_INCREMENT,
   first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
-  role_id INT NOT NULL,
+  r_id INT NOT NULL,
   manager_id INT,
-  PRIMARY KEY (id)
+  PRIMARY KEY (e_id),
+  FOREIGN KEY (r_id) REFERENCES role(r_id)
 );

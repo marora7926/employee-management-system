@@ -12,7 +12,7 @@ VALUES
 SELECT * FROM employeedb.department;
 
 -- Inserting data into role table
-INSERT INTO role (title, salary, department_id)
+INSERT INTO role (title, salary, d_id)
 VALUES
     ("HR Manager", 125000, 1),
     ("Recrutiment Officer", 60000, 1),
@@ -30,7 +30,7 @@ VALUES
 SELECT * FROM employeedb.role;
 
 -- Inserting data into employee table
-INSERT INTO employee (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (first_name, last_name, r_id, manager_id)
 VALUES
     ('Michael', 'Scott', 1, NULL),
     ('Andy', 'Bernard', 2, 1),
