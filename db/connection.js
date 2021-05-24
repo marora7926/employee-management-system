@@ -1,6 +1,5 @@
 // required dependencies
 const mysql = require('mysql');
-const logoArt = require('asciiart-logo')
 require('dotenv').config()
 
 // Connecting via js 
