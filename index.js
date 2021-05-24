@@ -19,14 +19,15 @@ connection.connect((err) => {
             name: 'EMS*',
             font: 'ANSI Shadow',
             lineChars: 5,
-            padding: 5,
+            padding: 2,
             margin: 5,
             borderColor: 'grey',
             logoColor: 'bold-green',
             textColor: 'bold-yellow',
         })
+        .left('*Employee Management System')
         .emptyLine() 
-        .right('*Employee Management System')
+        .right('v1.0.0, dated 25.05.2021')
         .render()
     )
     runTasks();
