@@ -7,6 +7,8 @@ require("console.table")
 const connection = require("./utils/connection");
 const addDepartment = require("./utils/addDepartment")
 const addEmployee = require("./utils/addEmployee")
+const addRole = require("./utils/addRole")
+const addRole = require("./utils/updateEmployeeRole")
 const viewDepartments = require("./utils/viewDepartments")
 const viewEmployees = require("./utils/viewEmployees")
 const viewRoles = require("./utils/viewRoles")
