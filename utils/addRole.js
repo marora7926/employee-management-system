@@ -29,7 +29,6 @@ function addRole() {
         connection.query(newRole, [answer.new_title, answer.new_salary, answer.new_department], (err, res) => {
             if (err) throw err;
             console.log("A new role (" + answer.new_firstName + answer.new_lastName + ") has been created");
-            // runTasks();
         });
     });
 };

@@ -25,6 +25,16 @@ WHEN I click on the choice "update an employee role"
 THEN I am able to update information about an employee
 ```
 
+## Future development
+
+The user will be able to perform the following tasks in the future iterations:
+  * Update employee managers
+  * View employees by manager
+  * Delete departments
+  * Delete roles
+  * Delete employees
+  * View total utilized budget of a department
+
 ## Terminal Commands for dependencies
   * npm i init -y
   * npm i

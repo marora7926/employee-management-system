@@ -14,7 +14,6 @@ function viewRoles () {
         console.log('Showing all roles........\n');
         console.table(res);
     });
-    // runTasks();
 };
 
 module.exports = viewRoles;

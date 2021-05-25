@@ -15,7 +15,6 @@ function viewEmployees () {
         console.log('Showing all employees........\n');
         console.table(res);
     })
-    // runTasks();
 };
 
 module.exports = viewEmployees;

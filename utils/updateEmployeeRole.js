@@ -24,7 +24,6 @@ function updateEmployeeRole(){
         connection.query(updateEmpRole, [answer.updateEmployee, answer.updateRole], (err, res) => {
             if (err) throw err;
             console.log("Role of Employee with id '" + answer.updateEmployee+ "' is updated in the system.");
-            runTasks(); 
         });
     });
 };

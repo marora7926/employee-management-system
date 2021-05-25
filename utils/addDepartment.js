@@ -13,12 +13,10 @@ function addDepartment() {
             message: "Write the name of the department you would like to add"
         }
     ])
-    
     .then((answer) => {
         connection.query(newDepartment, [answer.dept_new], (err, res) => {
             if (err) throw err;
             console.log("A new department titled " + "'" + answer.dept_new + "'" + " is added to department table.");
-            // runTasks();
         });
     });
 };

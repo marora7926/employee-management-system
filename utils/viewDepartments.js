@@ -11,8 +11,8 @@ function viewDepartments () {
         if (err) throw err;
         console.log('Showing all departments......\n');
         console.table(res);
+
     })
-    // runTasks();
 };
 
 module.exports = viewDepartments;

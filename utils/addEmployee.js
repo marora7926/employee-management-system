@@ -28,13 +28,12 @@ function addEmployee() {
             name: "manager",
             message: "Assign a manager to this employee",
             Choices: //to write this
-        },
+        }
     ])
     .then((answer) => {
         connection.query(newEmployee, [answer.new_firstName, answer.new_lastName, answer.role, answer.manager], (err, res) => {
             if (err) throw err;
             console.log("Welcome, " + answer.new_firstName + answer.new_lastName + " to the organisation");
-            // runTasks();
         });
     });
 };
