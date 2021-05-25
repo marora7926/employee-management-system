@@ -7,6 +7,8 @@ const connection = require("./utils/connection");
 const viewDepartments = require("./utils/viewDepartments")
 const addDepartment = require("./utils/addDepartment")
 const viewEmployees = require("./utils/viewEmployees")
+const viewEmpByDept = require("./utils/viewEmpByDept")
+const viewEmpByMgr = require("./utils/viewEmpByMgr")
 // const addEmployee = require("./utils/addEmployee")
 const viewRoles = require("./utils/viewRoles")
 // const addRole = require("./utils/addRole")
@@ -78,8 +80,8 @@ function runTasks() {
                 viewEmpByDept();
                 runTasks();
             break;
-            case 'view employees by roles':
-                viewEmpByRole();
+            case 'view employees by managers':
+                viewEmpByMgr();
                 runTasks();
             break;
             case 'View roles':
