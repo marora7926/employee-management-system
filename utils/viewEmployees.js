@@ -6,7 +6,7 @@ const allEmployeesQuery =
     employee.first_name AS "F_Name",
     employee.last_name AS "L_Name",
     employee.r_id AS "Role_ID",
-    employee.manager_id as "Manager_ID"
+    employee.manager_id as "Manager_ID",
     FROM employee`;
 
 function viewEmployees () {

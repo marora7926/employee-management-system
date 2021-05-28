@@ -2,7 +2,7 @@ const inquirer = require("inquirer");
 const connection = require('./connection')
 
 // function to add a role
-const newRole =
+const newRoleQuery =
     'INSERT INTO role (title, salary, d_id) VALUES (?,?,?)';
 
 // function to add an employee
@@ -26,7 +26,7 @@ function addRole() {
         },
     ])
     .then((answer) => {
-        connection.query(newRole, [answer.new_title, answer.new_salary, answer.new_department], (err, res) => {
+        connection.query(newRoleQuery, [answer.new_title, answer.new_salary, answer.new_department], (err, res) => {
             if (err) throw err;
             console.log("A new role (" + answer.new_firstName + answer.new_lastName + ") has been created");
         });

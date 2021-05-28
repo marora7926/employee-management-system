@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const connection = require('./connection')
 
-const newDepartment =
+const newDeptQuery =
     'INSERT INTO department (name) VALUES (?)';
 
 // function to add a department
@@ -14,7 +14,7 @@ function addDepartment() {
         }
     ])
     .then((answer) => {
-        connection.query(newDepartment, [answer.dept_new], (err, res) => {
+        connection.query(newDeptQuery, [answer.dept_new], (err, res) => {
             if (err) throw err;
             console.log("A new department titled " + "'" + answer.dept_new + "'" + " is added to department table.");
         });

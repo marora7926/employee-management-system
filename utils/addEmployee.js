@@ -1,7 +1,7 @@
 const inquirer = require("inquirer");
 const connection = require('./connection')
 
-const newEmployee =
+const newEmpQuery =
     'INSERT INTO employee (first_name, last_name, r_id, manager_id) VALUES (?,?,?,?)';
 
 // function to add an employee
@@ -31,7 +31,7 @@ function addEmployee() {
         }
     ])
     .then((answer) => {
-        connection.query(newEmployee, [answer.new_firstName, answer.new_lastName, answer.role, answer.manager], (err, res) => {
+        connection.query(newEmpQuery, [answer.new_firstName, answer.new_lastName, answer.role, answer.manager], (err, res) => {
             if (err) throw err;
             console.log("Welcome, " + answer.new_firstName + answer.new_lastName + " to the organisation");
         });
