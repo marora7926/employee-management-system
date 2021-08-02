@@ -4,22 +4,11 @@ const logoArt = require('asciiart-logo')
 require("console.table")
 
 // required files
-const connection = require("./utils/connection");
+const connection = require("./db/connection");
 const {
-    allDeptQuery, newDeptQuery, allEmpQuery, viewEmpByDeptQuery, viewMgrQuery, newEmpQuery, 
-    findRoleQuery, viewAllMgrQuery, allRoleQuery, newRoleQuery, updateEmpRole} =
-    require('./db/queries');
-const arrays = require('./utils/arrays');
-
-// const viewDepartments = require("./utils/viewDepartments")
-// const addDepartment = require("./utils/addDepartment")
-// const viewEmployees = require("./utils/viewEmployees")
-// const viewEmpByDept = require("./utils/viewEmpByDept")
-// const viewEmpByMgr = require("./utils/viewEmpByMgr")
-// const addEmployee = require("./utils/addEmployee")
-// const viewRoles = require("./utils/viewRoles")
-// // const addRole = require("./utils/addRole")
-// // const updateEmployeeRole = require("./utils/updateEmployeeRole")
+    allDeptQuery, newDeptQuery, allEmpQuery, viewEmpByDeptQuery, viewMgrQuery,  newEmpQuery, 
+    findRoleQuery, viewAllMgrQuery, allRoleQuery, newRoleQuery, updateEmpRole, db} =
+    require('./db');
 
 // after connection logo art using asciiart-logo
 connection.connect((err) => {
@@ -166,58 +155,117 @@ function viewMgr () {
 };
 
 // ADD AN EMPLOYEE
-// // creating a function to access role array
-// function findAllRoles () {
-//     connection.query(findRoleQuery, (err, res) => {
-//     if (err) throw err;
-//     });
-// }
+async function addEmployee() {
+    const roles = await db.findAllRoles();
+    console.log(roles);
+    const employees = await db.findAllEmployees();
 
-// function findAllManagers () {
-//     connection.query(viewAllMgrQuery, (err, res) => {
-//         if (err) throw err;
-//         return (res);
+    const roleChoices = roles.map(({ r_id, title }) => ({
+        name: title,
+        value: r_id
+      }));
+
+    const managerChoices = employees.map(({ e_id, first_name, last_name }) => ({
+        name: `${first_name} ${last_name}`,
+        value: e_id
+    }));
+
+    managerChoices.unshift({ name: "None", value: null });
+  
+      inquirer.prompt([
+      {
+        name: "first_name",
+        message: "Write the new employee first name"
+      },
+      {
+        name: "last_name",
+        message: "Write the new employee last name"
+      },
+      {
+          type:"list",
+          name: "r_id",
+          message: "please choose from the following roles",
+          choices: roleChoices
+      },
+      {
+        type:"list",
+        name: "manager_id",
+        message: "which manager you would like assign this role to",
+        choices: managerChoices
+    }
+    ])
+    .then(async employee => {
+        await db.createEmployee(employee);
+
+        console.log(
+          `SUCESSFULLY Added ${employee.first_name} ${employee.last_name} to the employee management system`
+        );
+        runTasks();
+    });
+
+  
+    // const { roleId } = await inquirer.prompt({
+    //   type: "list",
+    //   name: "roleId",
+    //   message: "Assign a role to this employee",
+    //   choices: roleChoices
+    // });
+  
+    // employee.role_id = roleId;
+   
+
+    // 
+
+    // const { managerId } = await inquirer.prompt({
+    //   type: "list",
+    //   name: "managerI",
+    //   message: "Assign a manager to this employee",
+    //   choices: managerChoices
+    // });
+
+    // employee.manager_id = managerId;
+
+   
+}
+   
+// // Add an employee function 
+// function addEmployee() {
+//     // const roles = findAllRoles();
+//     // const roleChoices = roles.map(({ id, title }) => ({ name: title, value: id })); 
+//     // const managers = findAllManagers();
+//     // const managerChoices = managers.map(({ id, f_name, l_name}) => ({ value: id, name: `${f_name} ${l_name}` }));
+//     inquirer.prompt([
+//         {
+//             type: "input",
+//             name: "newFirstName",
+//             message: "Write the new employee first name"
+//         },
+//         {
+//             type: "input",
+//             name: "newLastName",
+//             message: "Write the new employee last name"
+//         },
+//         {
+//             type: "list",
+//             name: "newRole",
+//             message: "Assign a role to this employee",
+//             Choices: arrays.roleArray
+//         },
+//         // {
+//         //     type: "list",
+//         //     name: "newManager",
+//         //     message: "Assign a manager to this employee",
+//         //     Choices: managerChoices
+//         // },
+//     ])
+//     .then((answer) => {
+//         connection.query(newEmpQuery, [answer.newFirstName, answer.newLastName, answer.newRole, answer.newManager], (err, res) => {
+//             if (err) throw err;
+//             console.log("Welcome, " + answer.newFirstName + answer.newLastName + "! A new employee added to the organisation");
+//             runTasks();
+//         });
 //     });
 // };
-    
-// Add an employee function 
-function addEmployee() {
-    // const roles = findAllRoles();
-    // const roleChoices = roles.map(({ id, title }) => ({ name: title, value: id })); 
-    // const managers = findAllManagers();
-    // const managerChoices = managers.map(({ id, f_name, l_name}) => ({ value: id, name: `${f_name} ${l_name}` }));
-    inquirer.prompt([
-        {
-            type: "input",
-            name: "newFirstName",
-            message: "Write the new employee first name"
-        },
-        {
-            type: "input",
-            name: "newLastName",
-            message: "Write the new employee last name"
-        },
-        {
-            type: "list",
-            name: "newRole",
-            message: "Assign a role to this employee",
-            Choices: arrays.roleArray
-        },
-        // {
-        //     type: "list",
-        //     name: "newManager",
-        //     message: "Assign a manager to this employee",
-        //     Choices: managerChoices
-        // },
-    ])
-    .then((answer) => {
-        connection.query(newEmpQuery, [answer.newFirstName, answer.newLastName, answer.newRole, answer.newManager], (err, res) => {
-            if (err) throw err;
-            console.log("Welcome, " + answer.newFirstName + answer.newLastName + "! A new employee added to the organisation");
-            runTasks();
-        });
-    });
-};
 
 // VIEW ALL ROLES
 // View all roles function to present a console table 
@@ -270,13 +318,13 @@ function updateEmployeeRole(){
         type: "list",
         name: "updateEmployee",
         message: "Which employee are you updating?",
-        // choices: //to write this
+        // choices: // to write this
         },  
         {
         type: "list",
         name: "updateRole",
         message: "What is the employee's new role?", 
-        // choices: //to write this
+        // choices: // to write this
         }, 
     ])
     .then((answer) => {
