@@ -202,71 +202,8 @@ async function addEmployee() {
         );
         runTasks();
     });
-
-  
-    // const { roleId } = await inquirer.prompt({
-    //   type: "list",
-    //   name: "roleId",
-    //   message: "Assign a role to this employee",
-    //   choices: roleChoices
-    // });
-  
-    // employee.role_id = roleId;
-   
-
-    // 
-
-    // const { managerId } = await inquirer.prompt({
-    //   type: "list",
-    //   name: "managerI",
-    //   message: "Assign a manager to this employee",
-    //   choices: managerChoices
-    // });
-
-    // employee.manager_id = managerId;
-
-   
 }
    
-// // Add an employee function 
-// function addEmployee() {
-//     // const roles = findAllRoles();
-//     // const roleChoices = roles.map(({ id, title }) => ({ name: title, value: id })); 
-//     // const managers = findAllManagers();
-//     // const managerChoices = managers.map(({ id, f_name, l_name}) => ({ value: id, name: `${f_name} ${l_name}` }));
-//     inquirer.prompt([
-//         {
-//             type: "input",
-//             name: "newFirstName",
-//             message: "Write the new employee first name"
-//         },
-//         {
-//             type: "input",
-//             name: "newLastName",
-//             message: "Write the new employee last name"
-//         },
-//         {
-//             type: "list",
-//             name: "newRole",
-//             message: "Assign a role to this employee",
-//             Choices: arrays.roleArray
-//         },
-//         // {
-//         //     type: "list",
-//         //     name: "newManager",
-//         //     message: "Assign a manager to this employee",
-//         //     Choices: managerChoices
-//         // },
-//     ])
-//     .then((answer) => {
-//         connection.query(newEmpQuery, [answer.newFirstName, answer.newLastName, answer.newRole, answer.newManager], (err, res) => {
-//             if (err) throw err;
-//             console.log("Welcome, " + answer.newFirstName + answer.newLastName + "! A new employee added to the organisation");
-//             runTasks();
-//         });
-//     });
-// };
-
 // VIEW ALL ROLES
 // View all roles function to present a console table 
 function viewRoles () {
@@ -279,10 +216,13 @@ function viewRoles () {
 };
 
 // ADD A ROLE
-// Add a role function 
-    function addRole() {
-    const departments = viewDepartments();
-    const deptChoices = departments.map(({ id: value, Department: name }) => ({ value, name }));
+// Add a role function
+    async function addRole() {
+    const departments = await db.findAllDepartments();
+    console.log(departments);
+    const deptChoices = departments.map(({ Dept_ID, Departments }) => ({ 
+        value: Dept_ID,
+        name: Departments }));
     inquirer.prompt([
         {
             type: "input",
@@ -298,13 +238,13 @@ function viewRoles () {
             type: "list",
             name: "new_department",
             message: "Assign a department to this new role",
-            Choices: deptChoices
+            choices: deptChoices
         },
     ])
     .then((answer) => {
         connection.query(newRoleQuery, [answer.new_title, answer.new_salary, answer.new_department], (err, res) => {
             if (err) throw err;
-            console.log("A new role (" + answer.new_firstName + answer.new_lastName + ") has been created");
+            console.log("A new role (" + answer.new_title + ") has been created");
             runTasks();
         });
     });
@@ -312,25 +252,41 @@ function viewRoles () {
 
 // UPDATE EMPLOYEE ROLE
 // function to update a role
-function updateEmployeeRole(){
+async function updateEmployeeRole(){
+    const roles = await db.findAllRoles();
+    console.log(roles);
+    const employees = await db.findAllEmployees();
+
+    const roleChoices = roles.map(({ r_id, title }) => ({
+        name: title,
+        value: r_id
+      }));
+
+    const employeeChoices = employees.map(({ e_id, first_name, last_name }) => ({
+        name: `${first_name} ${last_name}`,
+        value: e_id
+    }));
+
     inquirer.prompt([  
         {
         type: "list",
         name: "updateEmployee",
         message: "Which employee are you updating?",
-        // choices: // to write this
+        choices: employeeChoices
         },  
         {
         type: "list",
         name: "updateRole",
         message: "What is the employee's new role?", 
-        // choices: // to write this
+        choices: roleChoices
         }, 
     ])
     .then((answer) => {
-        connection.query(updateEmpRole, [answer.updateEmployee, answer.updateRole], (err, res) => {
+        console.log(answer, updateEmpRole);
+        connection.query(updateEmpRole, [answer.updateRole, answer.updateEmployee], (err, res) => {
             if (err) throw err;
             console.log("Role of Employee with id '" + answer.updateEmployee+ "' is updated in the system.");
+            runTasks();
         });
     });
 }

@@ -90,6 +90,10 @@ class DB {
                 role.salary FROM role LEFT JOIN department on role.d_id = department.d_id;`);
     };
 
+    findAllDepartments() {
+        return query (allDeptQuery);
+    };
+
     // Find all employees, join with roles and departments to display their roles, salaries, departments, and managers
     findAllEmployees() {
         return query (

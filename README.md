@@ -67,7 +67,7 @@ https://github.com/marora7926/employee-management-system
 
 
 ## Access Walkthrough Video here
-[Employee Management System Walkthrough Video](https://cloudstor.aarnet.edu.au/plus/s/xxxx)
+[Employee Management System Walkthrough Video](https://cloudstor.aarnet.edu.au/plus/s/QNOufTS9LDXyGjK)
 
 - - -
 © 2021 Mohit Arora. Confidential and Proprietary. All Rights Reserved.
